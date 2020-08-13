@@ -7,6 +7,7 @@ prompt_order = [
   "git_commit",
   "git_state",
   "git_status",
+  "python",
   "cmd_duration",
   "line_break",
   "character",
@@ -26,7 +27,9 @@ show_always = true
 disabled = true
 
 [python]
-disabled = true
+symbol = ""
+pyenv_version_name = false
+python_binary = "python3"
 
 [custom.tmux]
 # command = "echo -e '\b<t>'"

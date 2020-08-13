@@ -45,6 +45,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export LYNX_CFG="$HOME/.config/lynx/lynx.cfg"
 export LYNX_LSS="$HOME/.config/lynx/lynx.lss"
 
+export PYTHONSTARTUP="$HOME/.pythonrc.py"
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -103,14 +105,16 @@ alias tm="tmux"
 alias v=nvim
 alias view="nvim -R"
 
+# clock
+alias clock="tty-clock -c"
+
 alias Soorria="cd /mnt/c/Users/Soorria"
 alias uni="cd /mnt/c/Users/Soorria/Documents/uni"
 alias runi="cd /mnt/c/Users/Soorria/Documents/uni && ranger"
 
 # Windows
 e() {
-  path="${1-.}"
-  e "$(echo $path | tr '/' '\\')"
+  explorer.exe $@
 }
 
 # Stop the ghostscript thing
@@ -123,6 +127,21 @@ spimf() {
 
 lolban() {
   toilet -f 3d.flf -t "$@" | lolcat
+}
+
+# lf
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
 }
 
 # Enable vi keybindings

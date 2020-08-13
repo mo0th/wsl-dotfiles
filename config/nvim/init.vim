@@ -24,7 +24,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'lervag/vimtex'
   let g:tex_flavor='latex'
   Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-  set conceallevel=2
+  set conceallevel=1
   let g:tex_conceal='abdgm'
   let g:tex_conceal_frac=1
 
@@ -44,6 +44,8 @@ set smartcase
 set number relativenumber
 set termguicolors
 colorscheme dracula
+
+" let g:airline#extensions#tabline#enabled = 1
 
 " Makes transparent terminal better
 hi Normal guibg=NONE ctermbg=NONE
@@ -74,6 +76,7 @@ set splitbelow splitright
 set scrolloff=7
 
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['^node_modules$', '^__pycache__$', '^\.git$']
 
 " Fold according to indentation
 set foldmethod=indent
@@ -86,6 +89,10 @@ set nowritebackup
 
 " easier to see characters when `set list` is on
 set listchars=tab:→\ ,eol:↲,nbsp:␣,space:·,trail:·,extends:⟩,precedes:⟨
+
+" FZF
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
+let $FZF_DEFAULT_OPTS='--reverse'
 
 " autocmd stuff
 
@@ -122,7 +129,8 @@ nnoremap <silent> <leader>c :Commentary<CR>
 vnoremap <silent> <leader>c :Commentary<CR>
 nnoremap <silent> <leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>n :noh<CR>
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <M-p> :Files<CR>
 
 " Function keys
 set pastetoggle=<F3>
