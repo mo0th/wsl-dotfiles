@@ -47,6 +47,8 @@ export LYNX_LSS="$HOME/.config/lynx/lynx.lss"
 
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 
+export FZF_DEFAULT_OPTS="--layout=reverse"
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
