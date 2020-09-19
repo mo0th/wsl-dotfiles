@@ -54,6 +54,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# yarn
+export PATH="/home/mooth/.yarn/bin/:$PATH"
+
 # deno
 export DENO_INSTALL="/home/mooth/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
@@ -62,7 +65,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin:/home/mooth/go/bin"
 
 # my scripts
-export PATH="$PATH:/mnt/c/Users/Soorria/repos/scripts"
+export PATH="$PATH:/home/mooth/repos/scripts"
 export PATH="$HOME/.local/bin:$PATH"
 
 export EDITOR=nvim
@@ -93,9 +96,9 @@ alias python=python3
 alias pip=pip3
 
 # Shell Commands
-alias rm="rm -Iv"
-alias mv="mv -iv"
-alias cp="cp -iv"
+# alias rm="rm -iv"
+# alias mv="mv -iv"
+# alias cp="cp -iv"
 
 # lsd
 alias ls="lsd"
@@ -105,24 +108,24 @@ alias tm="tmux"
 
 # vim
 alias v=nvim
-alias view="nvim -R"
+alias view="nvim -r"
 
 # clock
 alias clock="tty-clock -c"
 
-alias Soorria="cd /mnt/c/Users/Soorria"
-alias uni="cd /mnt/c/Users/Soorria/Documents/uni"
-alias runi="cd /mnt/c/Users/Soorria/Documents/uni && ranger"
+alias soorria="cd /mnt/c/users/soorria"
+alias uni="cd /mnt/c/users/soorria/documents/uni"
+alias runi="cd /mnt/c/users/soorria/documents/uni && ranger"
 
-# Windows
+# windows
 e() {
   explorer.exe $@
 }
 
-# Stop the ghostscript thing
+# stop the ghostscript thing
 alias gs=""
 
-# SPIM
+# spim
 spimf() {
   spim -f "${1}"
 }
@@ -148,9 +151,6 @@ lfcd () {
 
 # Enable vi keybindings
 set -o vi
-
-# Bash completion
-eval "$(pandoc --bash-completion)"
 
 # prompt
 eval "$(starship init bash)"
