@@ -90,10 +90,16 @@ alias gl="git pull"
 alias gp="git push"
 alias gss="git status -s"
 alias gst="git status"
+gsave() {
+  git add .
+  git commit -m "${1}"
+}
 
 # Python
 alias python=python3
 alias pip=pip3
+
+alias wl="python /home/mooth/repos/wl/cli.py"
 
 # Shell Commands
 # alias rm="rm -iv"
@@ -108,7 +114,10 @@ alias tm="tmux"
 
 # vim
 alias v=nvim
-alias view="nvim -r"
+alias view="nvim -R"
+
+# vscode
+alias c="code"
 
 # clock
 alias clock="tty-clock -c"
@@ -121,6 +130,10 @@ alias runi="cd /mnt/c/users/soorria/documents/uni && ranger"
 e() {
   explorer.exe $@
 }
+
+alias pws='powershell.exe -Command "cd C:\\Users\\Soorria; powershell"'
+alias pwss='powershell.exe'
+alias wpsql='powershell.exe -Command "psql"'
 
 # stop the ghostscript thing
 alias gs=""

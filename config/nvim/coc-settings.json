@@ -1,4 +1,5 @@
 {
   // "diagnostic.errorSign": "×"
-  "diagnostic.errorSign": ""
+  "diagnostic.errorSign": "",
+  "sql.database": "postgresql"
 }
