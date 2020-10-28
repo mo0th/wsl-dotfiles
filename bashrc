@@ -88,6 +88,7 @@ alias gf="git fetch"
 alias ggpush="git push origin HEAD"
 alias gl="git pull"
 alias gp="git push"
+alias glp="git pull && git push"
 alias gss="git status -s"
 alias gst="git status"
 gsave() {
@@ -131,8 +132,8 @@ e() {
   explorer.exe $@
 }
 
-alias pws='powershell.exe -Command "cd C:\\Users\\Soorria; powershell"'
-alias pwss='powershell.exe'
+alias pwss='powershell.exe -Command "cd C:\\Users\\Soorria; powershell"'
+alias pws='powershell.exe'
 alias wpsql='powershell.exe -Command "psql"'
 
 # stop the ghostscript thing
