@@ -62,13 +62,18 @@ export DENO_INSTALL="/home/mooth/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
 # go
-export PATH="$PATH:/usr/local/go/bin:/home/mooth/go/bin"
+export PATH="/usr/local/go/bin:/home/mooth/go/bin:$PATH"
 
 # my scripts
-export PATH="$PATH:/home/mooth/repos/scripts"
+export PATH="/home/mooth/repos/scripts:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
-export EDITOR=nvim
+if [ "${TERM_PROGRAM}" = "vscode" ]; then
+  export EDITOR=code
+else
+  export EDITOR=nvim
+fi
+
 export VISUAL="${EDITOR}"
 
 # =====:Aliases =====
@@ -135,6 +140,7 @@ e() {
 alias pwss='powershell.exe -Command "cd C:\\Users\\Soorria; powershell"'
 alias pws='powershell.exe'
 alias wpsql='powershell.exe -Command "psql"'
+alias wcode='powershell.exe -Command "code ."'
 
 # stop the ghostscript thing
 alias gs=""
@@ -163,8 +169,23 @@ lfcd () {
     fi
 }
 
+# Postgresql Stuff
+export PGHOME="/usr/local/pgsql"
+export PGDATA="$PGHOME/data"
+export PGHOST=$PGDATA
+export PGPORT=5432
+export LD_LIBRARY_PATH="$PGHOME/lib"
+export PATH="$PGHOME/bin:$PATH"
+pg-start() { pg_ctl start -l $PGHOME/log ; echo "Check logs at '$PGHOME/log'" ; }
+pg-stop() { pg_ctl stop ; }
+
+
 # Enable vi keybindings
 set -o vi
 
 # prompt
 eval "$(starship init bash)"
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+sudo /etc/init.d/dbus start &> /dev/null
+
