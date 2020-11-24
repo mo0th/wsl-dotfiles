@@ -1,5 +1,6 @@
 {
   // "diagnostic.errorSign": "×"
   "diagnostic.errorSign": "",
-  "sql.database": "postgresql"
+  "sql.database": "postgresql",
+  "eslint.autoFixOnSave": true
 }

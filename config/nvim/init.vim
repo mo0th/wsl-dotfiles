@@ -102,14 +102,12 @@ autocmd FileType markdown setlocal spell spelllang=en_au
 
 " Assembly
 autocmd FileType asm setlocal commentstring=#\ %s
-" For COMP1521 MIPS stuff
-autocmd FileType asm setlocal syntax=mips
-autocmd FileType asm setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 
 " C
 autocmd FileType c setlocal commentstring=//\ %s
-" For COMP2521 & COMP1521 C stuffl
-autocmd FileType c setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
+
+" SQL
+autocmd FileType sql setlocal commentstring=\-\-\ %s
 
 " All
 " Remove trailing whitespace
