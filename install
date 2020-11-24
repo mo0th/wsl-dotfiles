@@ -1,0 +1,31 @@
+#!/bin/sh
+
+here=$(pwd)
+
+# Home dir files
+for f in $(find . -maxdepth 1 -type f | cut -c 3-); do
+  [ $f = install ] && continue;
+  ln -sf "$here/$f" "$HOME/.$f";
+done
+
+# config folder
+[ ! -d $HOME/.config ] && mkdir $HOME/.config
+
+[ -d $HOME/.config/nvim ] && {
+  src="$HOME/.config/nvim"
+  bak="$HOME/.config/nvim.bak"
+  mv $src $bak
+  echo "$src already exists. Moved original to $bak"
+}
+ln -sf $here/config/nvim $HOME/.config/nvim
+
+ln -sf $here/config/starship.toml $HOME/.config/starship.toml
+
+[ -d $HOME/.config/neofetch ] && {
+  src="$HOME/.config/neofetch"
+  bak="$HOME/.config/neofetch.bak"
+  mv $src $bak
+  echo "$src already exists. Moved original to $bak"
+}
+ln -sf $here/config/neofetch $HOME/.config/neofetch
+
