@@ -26,7 +26,6 @@ shopt -s globstar
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -107,13 +106,11 @@ alias pip=pip3
 
 alias wl="python /home/mooth/repos/wl/cli.py"
 
-# Shell Commands
-# alias rm="rm -iv"
-# alias mv="mv -iv"
-# alias cp="cp -iv"
-
 # lsd
 alias ls="lsd"
+alias ll="lsd -lA"
+alias la="lsd -A"
+alias l="lsd -l"
 
 # tmux
 alias tm="tmux"
@@ -121,9 +118,6 @@ alias tm="tmux"
 # vim
 alias v=nvim
 alias view="nvim -R"
-
-# vscode
-alias c="code"
 
 # clock
 alias clock="tty-clock -c"

@@ -20,7 +20,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'sheerun/vim-polyglot'
   Plug 'fatih/vim-go'
-  Plug 'harenome/vim-mipssyntax'
   Plug 'lervag/vimtex'
   let g:tex_flavor='latex'
   Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -108,6 +107,9 @@ autocmd FileType c setlocal commentstring=//\ %s
 
 " SQL
 autocmd FileType sql setlocal commentstring=\-\-\ %s
+
+" " wl
+" autocmd FileType * if !empty(matchstr(@%, "wl$")) | set syntax=csv | endif
 
 " All
 " Remove trailing whitespace
