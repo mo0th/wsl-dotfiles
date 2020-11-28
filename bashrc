@@ -139,6 +139,8 @@ alias wcode='powershell.exe -Command "code ."'
 # stop the ghostscript thing
 alias gs=""
 
+# Muscle memory
+alias ":q"="exit"
 # spim
 spimf() {
   spim -f "${1}"
@@ -173,13 +175,13 @@ export PATH="$PGHOME/bin:$PATH"
 pg-start() { pg_ctl start -l $PGHOME/log ; echo "Check logs at '$PGHOME/log'" ; }
 pg-stop() { pg_ctl stop ; }
 
-
 # Enable vi keybindings
 set -o vi
 
 # prompt
 eval "$(starship init bash)"
 
+# Using xserver on wsl2
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 sudo /etc/init.d/dbus start &> /dev/null
 

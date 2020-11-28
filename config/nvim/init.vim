@@ -8,33 +8,43 @@ set clipboard+=unnamedplus
 " `:h fo-table` for all options
 " set formatoptions-=o
 
-call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'dracula/vim', { 'as': 'dracula' }
-  Plug 'luochen1990/rainbow'
-  let g:rainbow_active = 0 " make color scheme good before enabling
-  Plug 'scrooloose/nerdtree'
+" Install vim-plug if not already installed
+if empty(glob('~/.local/share/nvim/plugged'))
+  silent !sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall
+endif
 
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if filereadable(expand("~/.local/share/nvim/site/autoload/plug.vim"))
+  call plug#begin('~/.local/share/nvim/plugged')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'dracula/vim', { 'as': 'dracula' }
 
-  Plug 'sheerun/vim-polyglot'
-  Plug 'fatih/vim-go'
-  Plug 'lervag/vimtex'
-  let g:tex_flavor='latex'
-  Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-  set conceallevel=1
-  let g:tex_conceal='abdgm'
-  let g:tex_conceal_frac=1
+    Plug 'scrooloose/nerdtree'
 
-  Plug 'alvan/vim-closetag'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-commentary'
-  Plug 'machakann/vim-sandwich'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-call plug#end()
+    Plug 'sheerun/vim-polyglot'
+    Plug 'fatih/vim-go'
+
+    Plug 'alvan/vim-closetag'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+    " Unused
+    " Plug 'lervag/vimtex'
+    " let g:tex_flavor='latex'
+    " Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+    " let g:tex_conceal='abdgm'
+    " let g:tex_conceal_frac=1
+    " Plug 'luochen1990/rainbow'
+    " let g:rainbow_active = 0 " make color scheme good before enabling
+
+  call plug#end()
+endif
 
 set mouse=a
 syntax on
@@ -43,6 +53,8 @@ set smartcase
 set number relativenumber
 set termguicolors
 colorscheme dracula
+
+set conceallevel=1
 
 " let g:airline#extensions#tabline#enabled = 1
 
@@ -108,12 +120,19 @@ autocmd FileType c setlocal commentstring=//\ %s
 " SQL
 autocmd FileType sql setlocal commentstring=\-\-\ %s
 
-" " wl
-" autocmd FileType * if !empty(matchstr(@%, "wl$")) | set syntax=csv | endif
-
 " All
 " Remove trailing whitespace
-autocmd BufWritePre * %s/\s\+$//e
+
+fun! StripTrailingWhitespace()
+  if &ft =~ 'markdown'
+    return
+  endif
+
+  %s/\s\+$//e
+endfun
+
+autocmd BufWritePre * call StripTrailingWhitespace()
+
 " start at last place you were editing
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
