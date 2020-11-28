@@ -1,0 +1,6 @@
+[user]
+	email = soorria.ss@gmail.com
+	name = Soorria Saruva
+
+[alias]
+	cd-root = !cd $(git rev-parse --show-toplevel)
