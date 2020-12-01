@@ -2,5 +2,12 @@
   // "diagnostic.errorSign": "×"
   "diagnostic.errorSign": "",
   "sql.database": "postgresql",
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "prettier.semi": false,
+  "prettier.arrowParens": "avoid",
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "es5",
+  "prettier.bracketSpacing": true,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true
 }
