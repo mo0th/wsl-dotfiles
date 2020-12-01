@@ -32,9 +32,7 @@ pyenv_version_name = false
 python_binary = "python3"
 
 [custom.tmux]
-# command = "echo -e '\b<t>'"
 command = "echo tmux"
 when = """[ -n "$TMUX" ]"""
 description = "Show if running in tmux"
-# prefix = ""
 style = "bold bright-green"
