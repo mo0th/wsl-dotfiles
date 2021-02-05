@@ -2,7 +2,7 @@ let mapleader=";"
 
 set nocompatible
 " Use system clipboard
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 " formatoptions stuff
 " `:h fo-table` for all options
@@ -56,7 +56,7 @@ colorscheme dracula
 
 set conceallevel=1
 
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " Makes transparent terminal better
 hi Normal guibg=NONE ctermbg=NONE

@@ -79,6 +79,10 @@ export PAGER="less"
 
 # =====:Aliases =====
 
+echo_err() {
+  >&2 echo $@
+}
+
 # Git
 alias g="git"
 alias ga="git add"
@@ -86,7 +90,8 @@ alias gaa="git add --all"
 alias gb="git branch"
 alias gc="git commit"
 alias gcb="git checkout -b"
-alias gcm="git checkout master"
+# alias gcm="git checkout master"
+# alias gcp="git checkout production"
 alias gcmsg="git commit -m"
 alias gco="git checkout"
 alias gd="git diff"
@@ -97,9 +102,29 @@ alias gp="git push"
 alias glp="git pull && git push"
 alias gss="git status -s"
 alias gst="git status"
-gsave() {
-  git add .
-  git commit -m "${1}"
+alias "git-root"='cd $(git rev-parse --show-toplevel)'
+
+gcm() {
+  declare -a branches=("master" "main")
+  for branch in "${branches[@]}"; do
+    if [[ -z "$(git branch -l $branch &>/dev/null)" ]]; then
+      git checkout $branch
+      return 0
+    fi
+  done
+  echo_err "None of the following 'main' branches exists:" "${branches[@]}"
+  return 1
+}
+
+gcp() {
+  declare -a branches=("production" "prod")
+  for branch in "${branches[@]}"; do
+    if [[ -z "$(git branch -l $branch &>/dev/null)" ]]; then
+      git checkout $branch
+      return 0
+    fi
+  done
+  echo_err "None of the following 'production' branches exists:" "${branches[@]}"
 }
 
 # Python
@@ -123,6 +148,9 @@ alias view="nvim -R"
 
 # clock
 alias clock="tty-clock -c"
+
+# rmdir
+alias rd="rmdir"
 
 alias soorria="cd /mnt/c/users/soorria"
 alias uni="cd /mnt/c/users/soorria/documents/uni"
@@ -152,20 +180,34 @@ lolban() {
   toilet -f 3d.flf -t "$@" | lolcat
 }
 
-# lf
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
+# # lf
+# lfcd () {
+#     tmp="$(mktemp)"
+#     lf -last-dir-path="$tmp" "$@"
+#     if [ -f "$tmp" ]; then
+#         dir="$(cat "$tmp")"
+#         rm -f "$tmp" >/dev/null
+#         if [ -d "$dir" ]; then
+#             if [ "$dir" != "$(pwd)" ]; then
+#                 cd "$dir"
+#             fi
+#         fi
+#     fi
+# }
+
+# repo thing
+repo() {
+  path="$HOME/repos/${1}"
+  mkdir -p $path
+  cd $path
 }
+
+# mkcd
+mkcd() {
+  mkdir -p $1
+  cd $1
+}
+
 
 # Postgresql Stuff
 export PGHOME="/usr/local/pgsql"
@@ -180,10 +222,13 @@ pg-stop() { pg_ctl stop ; }
 # Enable vi keybindings
 set -o vi
 
-# prompt
-eval "$(starship init bash)"
-
 # Using xserver on wsl2
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 sudo /etc/init.d/dbus start &> /dev/null
+
+# Completion
+eval $(gh completion -s bash)
+
+# prompt
+eval "$(starship init bash)"
 

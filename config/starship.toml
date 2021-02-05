@@ -1,38 +1,22 @@
 add_newline = false
-prompt_order = [
-  "username",
-  "custom.tmux",
-  "directory",
-  "git_branch",
-  "git_commit",
-  "git_state",
-  "git_status",
-  "python",
-  "cmd_duration",
-  "line_break",
-  "character",
-]
 
-[line_break]
-disabled = false
+format = """$username$host$custom$directory$git_branch$git_commit$git_state$git_status$cmd_duration\n$character"""
 
 [directory]
 truncation_length = 1
 truncate_to_repo = true
+format = " in [$path]($style) [$read_only]($read_only_style)"
 
 [username]
 show_always = true
+format = "[$user]($style)"
 
-[nodejs]
-disabled = true
-
-[python]
-symbol = ""
-pyenv_version_name = false
-python_binary = "python3"
+[hostname]
+ssh_only = false
 
 [custom.tmux]
-command = "echo tmux"
-when = """[ -n "$TMUX" ]"""
+command = "tmux display-message -p '#S'"
+when = "[ -n \"$TMUX\" ]"
 description = "Show if running in tmux"
 style = "bold bright-green"
+format = ':[tm\(]($style)[$output](white)[\)]($style)'
